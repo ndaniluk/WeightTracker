@@ -1,0 +1,32 @@
+@{
+    ViewData["Title"] = "Add training note";
+}
+
+@model TrainingNote
+
+@using (Html.BeginForm("", "TrainingNotes", FormMethod.Post))
+{
+    <fieldset>
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <table>
+            <tr>
+                <td>@Html.LabelFor(note => note.Title)</td>
+                <td>@Html.TextBoxFor(note => note.Title)</td>
+                <td>@Html.ValidationMessageFor(note => note.Title)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(note => note.Description)</td>
+                <td>@Html.TextBoxFor(note => note.Description)</td>
+                <td>@Html.ValidationMessageFor(note => note.Description)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Add"/>
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}

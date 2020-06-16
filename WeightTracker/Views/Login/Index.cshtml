@@ -1,18 +1,10 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
 @{
     ViewData["Title"] = "Log in";
 }
 
-@model AuthenticateRequest
+@model LoginInfo
 
-@using (Html.BeginForm("Authenticate", "Login", FormMethod.Post))
+@using (Html.BeginForm("", "Login", FormMethod.Post))
 {
     <fieldset>
         @Html.AntiForgeryToken()
