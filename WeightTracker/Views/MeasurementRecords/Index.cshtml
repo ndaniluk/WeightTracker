@@ -1,0 +1,84 @@
+﻿@model IEnumerable<WeightTracker.Entities.MeasurementRecord>
+
+@{
+   ViewData["Title"] = "Index";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Measurements [cm]</h1>
+
+<p>
+   <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+   <thead>
+      <tr>
+         <th>
+            @Html.DisplayNameFor(model => model.Chest)
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Biceps)
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Waist)
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Hips)
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Thigh)
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Calf)
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Height)
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.Weight) [kg]
+         </th>
+         <th>
+            @Html.DisplayNameFor(model => model.TimeStamp)
+         </th>
+         <th></th>
+      </tr>
+   </thead>
+   <tbody>
+      @foreach (var item in Model.OrderByDescending(entry => entry.TimeStamp))
+      {
+         <tr>
+            <td>
+               @Html.DisplayFor(modelItem => item.Chest)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Biceps)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Waist)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Hips)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Thigh)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Calf)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+               @Html.DisplayFor(modelItem => item.TimeStamp)
+            </td>
+            <td>
+               <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+               <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+         </tr>
+      }
+   </tbody>
+</table>
