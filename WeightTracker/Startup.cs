@@ -81,8 +81,8 @@ namespace WeightTracker
       private async Task InitRoles(IServiceProvider serviceProvider)
       {
          var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-         var roleCheck = await roleManager.RoleExistsAsync("Administrator");
-         if (!roleCheck)
+         var roleCheckAdministrator = await roleManager.RoleExistsAsync("Administrator");
+         if (!roleCheckAdministrator)
          {
             await roleManager.CreateAsync(new IdentityRole("Administrator"));
          }

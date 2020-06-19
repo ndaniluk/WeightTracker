@@ -10,7 +10,7 @@ namespace WeightTracker.Validators
    {
       public override bool IsValid(object value)
       {
-         return value != null && int.TryParse(value.ToString(), out var i) && i > 0;
+         return value != null && float.TryParse(value.ToString(), out var i) && i > 0;
       }
    }
 }
