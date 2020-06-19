@@ -10,6 +10,7 @@ namespace WeightTracker.Entities
       public string Title { get; set; }
       [DataType(DataType.MultilineText)]
       public string Description { get; set; }
+      [DataType(DataType.Date)]
       public DateTime TimeStamp { get; set; }
       public User User { get; set; }
    }

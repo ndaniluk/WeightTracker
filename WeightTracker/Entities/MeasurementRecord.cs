@@ -24,6 +24,7 @@ namespace WeightTracker.Entities
       public float Height { get; set; }
       [IsNumberGreaterThanZero]
       public float Weight { get; set; }
+      [DataType(DataType.Date)]
       public DateTime TimeStamp { get; set; }
       public User User { get; set; }
    }

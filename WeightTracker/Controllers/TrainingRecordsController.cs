@@ -21,24 +21,18 @@ namespace WeightTracker.Controllers
          _userManager = userManager;
       }
 
-      // GET: TrainingRecords
       [HttpGet]
       public async Task<IActionResult> Index()
         {
             return View(await _context.TrainingRecords.ToListAsync());
         }
 
-
-        // GET: TrainingRecords/Create
         [HttpGet("create")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: TrainingRecords/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("create")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,TimeStamp")] TrainingRecord trainingRecord)
@@ -56,7 +50,6 @@ namespace WeightTracker.Controllers
             return View(trainingRecord);
         }
 
-        // GET: TrainingRecords/Edit/id
         [HttpGet("edit/{id:int}")]
         public async Task<IActionResult> Edit(int? id)
         {
@@ -73,9 +66,6 @@ namespace WeightTracker.Controllers
             return View(trainingRecord);
         }
 
-        // POST: TrainingRecords/Edit/id
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost("edit/{id:int}")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Description,TimeStamp")] TrainingRecord trainingRecord)
@@ -108,7 +98,6 @@ namespace WeightTracker.Controllers
             return View(trainingRecord);
         }
 
-        // GET: TrainingRecords/Delete/id
         [HttpGet("delete/{id:int}")]
         public async Task<IActionResult> Delete(int? id)
         {
@@ -127,7 +116,6 @@ namespace WeightTracker.Controllers
             return View(trainingRecord);
         }
 
-        // POST: TrainingRecords/Delete/id
         [HttpPost("delete/{id:int}"), ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

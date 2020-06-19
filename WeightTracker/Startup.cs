@@ -82,9 +82,14 @@ namespace WeightTracker
       {
          var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
          var roleCheckAdministrator = await roleManager.RoleExistsAsync("Administrator");
+         var roleCheckUser = await roleManager.RoleExistsAsync("User");
          if (!roleCheckAdministrator)
          {
             await roleManager.CreateAsync(new IdentityRole("Administrator"));
+         }
+         if (!roleCheckUser)
+         {
+            await roleManager.CreateAsync(new IdentityRole("User"));
          }
       }
    }
