@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WeightTracker.Data;
 using WeightTracker.Entities;
+using WeightTracker.Services;
 
 namespace WeightTracker.Controllers
 {
@@ -16,11 +17,13 @@ namespace WeightTracker.Controllers
    {
       private readonly WeightTrackerContext _context;
       private readonly UserManager<User> _userManager;
+      private readonly UserService _userService;
 
       public MeasurementRecordsController(WeightTrackerContext context, UserManager<User> userManager)
       {
          _context = context;
          _userManager = userManager;
+         _userService = new UserService(_userManager, _context);
       }
 
       [HttpGet]
@@ -54,9 +57,9 @@ namespace WeightTracker.Controllers
       }
 
       [HttpGet("edit/{id:int}")]
-      public async Task<IActionResult> Edit(int? id)
+      public async Task<IActionResult> Edit(int id)
       {
-         if (id == null)
+         if (!_userService.IsCurrentUsersMeasurement(id, await _userManager.GetUserAsync(User)))
          {
             return NotFound();
          }
@@ -73,7 +76,7 @@ namespace WeightTracker.Controllers
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> Edit(int id, [Bind("Id,Chest,Biceps,Waist,Hips,Thigh,Calf,Height,Weight,TimeStamp")] MeasurementRecord measurementRecord)
       {
-         if (id != measurementRecord.Id)
+         if (id != measurementRecord.Id || !_userService.IsCurrentUsersMeasurement(id, await _userManager.GetUserAsync(User)))
          {
             return NotFound();
          }
@@ -102,9 +105,9 @@ namespace WeightTracker.Controllers
       }
 
       [HttpGet("delete/{id:int}")]
-      public async Task<IActionResult> Delete(int? id)
+      public async Task<IActionResult> Delete(int id)
       {
-         if (id == null)
+         if (!_userService.IsCurrentUsersMeasurement(id, await _userManager.GetUserAsync(User)))
          {
             return NotFound();
          }
@@ -123,10 +126,15 @@ namespace WeightTracker.Controllers
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> DeleteConfirmed(int id)
       {
-         var measurementRecord = await _context.MeasurementRecords.FindAsync(id);
-         _context.MeasurementRecords.Remove(measurementRecord);
-         await _context.SaveChangesAsync();
-         return RedirectToAction(nameof(Index));
+         if (_userService.IsCurrentUsersMeasurement(id, await _userManager.GetUserAsync(User)))
+         {
+            var measurementRecord = await _context.MeasurementRecords.FindAsync(id);
+            _context.MeasurementRecords.Remove(measurementRecord);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+         }
+         return NotFound();
+
       }
 
       private bool MeasurementRecordExists(int id)

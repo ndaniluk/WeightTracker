@@ -30,5 +30,33 @@ namespace WeightTracker.Services
          var user = _dbContext.Users.Where(x => x.Id == id).SingleOrDefault();
          return new AdminPanelUser(user.Id, user.Email, await IsAdmin(user));
       }
+
+      public bool IsCurrentUsersTraining(int id, User user)
+      {
+         if(id < 1)
+         {
+            return false;
+         }
+         var userId = _dbContext.TrainingRecords.Where(x => x.Id == id).Select(x => x.User.Id).SingleOrDefault();
+         if(userId != user.Id)
+         {
+            return false;
+         }
+         return true;
+      }
+
+      public bool IsCurrentUsersMeasurement(int id, User user)
+      {
+         if (id < 1)
+         {
+            return false;
+         }
+         var userId = _dbContext.MeasurementRecords.Where(x => x.Id == id).Select(x => x.User.Id).SingleOrDefault();
+         if (userId != user.Id)
+         {
+            return false;
+         }
+         return true;
+      }
    }
 }
