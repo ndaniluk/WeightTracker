@@ -44,41 +44,6 @@
       </tr>
    </thead>
    <tbody>
-      @foreach (var item in Model.OrderByDescending(entry => entry.TimeStamp))
-      {
-         <tr>
-            <td>
-               @Html.DisplayFor(modelItem => item.Chest)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Biceps)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Waist)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Hips)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Thigh)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Calf)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Height)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.Weight)
-            </td>
-            <td>
-               @Html.DisplayFor(modelItem => item.TimeStamp)
-            </td>
-            <td>
-               <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-               <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-         </tr>
-      }
+      @await Html.PartialAsync("_MeasurementListPartial", Model)
    </tbody>
 </table>
