@@ -1,0 +1,48 @@
+﻿@model WeightTracker.Models.AdminPanelUser
+
+@{
+   ViewData["Title"] = "Edit";
+   Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>AdminPanelUser</h4>
+<hr />
+<div class="row">
+   <div class="col-md-4">
+      <form asp-action="EditRole">
+         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+         <input type="hidden" asp-for="Id" />
+         @if (Model.IsAdmin)
+         {
+            <div class="form-group form-check">
+               <label class="form-check-label">
+                  <p>Do you want to revoke administrator privileges for this user?</p>
+               </label>
+            </div>
+            <div class="form-group">
+               <input type="submit" value="Revoke" class="btn btn-primary" />
+            </div>
+
+         }
+         else
+         {
+            <div class="form-group form-check">
+               <label class="form-check-label">
+                  <p>Do you want to grant administrator privileges for this user?</p>
+               </label>
+            </div>
+            <div class="form-group">
+               <input type="submit" value="Grant" class="btn btn-primary" />
+            </div>
+         }
+
+      </form>
+   </div>
+</div>
+
+<div>
+   <a asp-action="Index">Back to List</a>
+</div>
+

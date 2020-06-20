@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WeightTracker.Data;
 
 namespace WeightTracker.Migrations
 {
     [DbContext(typeof(WeightTrackerContext))]
-    partial class WeightTrackerContextModelSnapshot : ModelSnapshot
+    [Migration("20200620165932_Delete cascade")]
+    partial class Deletecascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

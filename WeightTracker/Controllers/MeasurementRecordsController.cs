@@ -23,7 +23,6 @@ namespace WeightTracker.Controllers
          _userManager = userManager;
       }
 
-      // GET: MeasurementRecords
       [HttpGet]
       public async Task<IActionResult> Index()
       {
@@ -31,14 +30,12 @@ namespace WeightTracker.Controllers
          return View(await _context.MeasurementRecords.Where(record => record.User == user).ToListAsync());
       }
 
-      // GET: MeasurementRecords/Create
       [HttpGet("create")]
       public IActionResult Create()
       {
          return View();
       }
 
-      // POST: MeasurementRecords/Create
       [HttpPost("create")]
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> Create([Bind("Id,Chest,Biceps,Waist,Hips,Thigh,Calf,Height,Weight,TimeStamp")] MeasurementRecord measurementRecord)
@@ -56,7 +53,6 @@ namespace WeightTracker.Controllers
          return View(measurementRecord);
       }
 
-      // GET: MeasurementRecords/Edit/id
       [HttpGet("edit/{id:int}")]
       public async Task<IActionResult> Edit(int? id)
       {
@@ -73,7 +69,6 @@ namespace WeightTracker.Controllers
          return View(measurementRecord);
       }
 
-      // POST: MeasurementRecords/Edit/id
       [HttpPost("edit/{id:int}")]
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> Edit(int id, [Bind("Id,Chest,Biceps,Waist,Hips,Thigh,Calf,Height,Weight,TimeStamp")] MeasurementRecord measurementRecord)
@@ -106,7 +101,6 @@ namespace WeightTracker.Controllers
          return View(measurementRecord);
       }
 
-      // GET: MeasurementRecords/Delete/id
       [HttpGet("delete/{id:int}")]
       public async Task<IActionResult> Delete(int? id)
       {
@@ -125,7 +119,6 @@ namespace WeightTracker.Controllers
          return View(measurementRecord);
       }
 
-      // POST: MeasurementRecords/Delete/id
       [HttpPost("delete/{id:int}"), ActionName("Delete")]
       [ValidateAntiForgeryToken]
       public async Task<IActionResult> DeleteConfirmed(int id)

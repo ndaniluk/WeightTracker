@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WeightTracker.Data;
 using WeightTracker.Entities;
+using WeightTracker.Models;
 
 namespace WeightTracker.Services
 {
@@ -22,10 +23,12 @@ namespace WeightTracker.Services
       {
          return await _userManager.IsInRoleAsync(user, "ADMINISTRATOR");
       }
-      //public async Task<IList<User>> GetAllUsersAsync()
-      //{
-      //var users = _dbContext.Users.ToList();
-      //users.ForEach(x => x.em)
-      //}
+
+      public async Task<AdminPanelUser> getAdminPanelUserById(string id)
+      {
+         var userService = new UserService(_userManager, _dbContext);
+         var user = _dbContext.Users.Where(x => x.Id == id).SingleOrDefault();
+         return new AdminPanelUser(user.Id, user.Email, await IsAdmin(user));
+      }
    }
 }
