@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +12,7 @@ using WeightTracker.Services;
 
 namespace WeightTracker.Controllers
 {
+   [Authorize(Roles = "Administrator")]
    public class AdminPanelUsersController : Controller
    {
       private readonly WeightTrackerContext _dbContext;
@@ -25,7 +27,6 @@ namespace WeightTracker.Controllers
          userService = new UserService(_userManager, _dbContext);
 
       }
-
 
       public async Task<IActionResult> Index()
       {
